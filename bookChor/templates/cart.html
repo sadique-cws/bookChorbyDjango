@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="flex flex-col p-10">
+        <div class="w-full">
+            <h1 class="text-2xl font-bold">My Cart (3)</h1>
+        </div>
+       <div class="flex">
+        <div class="w-8/12 p-5">
+            <div class="flex gap-4">
+                <div class="w-1/6"><img src="https://picsum.photos/50/50" class="w-full" alt=""></div>
+                <div class="w-5/6 flex flex-col gap-2">
+                    <h1 class="text-xl font-sans font-bold uppercase">this is product title</h1>
+                    <h6 class="text-xl font-semibold"><span class="text-green-700">400/-</span> <span class="text-red-700"><del>600/-</del></span></h6>
+                    <div class="flex gap-4  items-center">
+                        <a href="" class="bg-red-500 hover:bg-red-700 text-white px-3 py-2 text-xl">-</a>
+                        <span class="text-2xl font-semibold">0</span>
+                        <a href="" class="bg-green-500 hover:bg-green-700 text-white px-3 py-2 text-xl">+</a>
+                    </div>
+                </div>
+            </div>
+        </div>    
+        <div class="w-4/12">
+            <h1 class="text-3xl font-bold  mb-3">Price Details</h1>
+            <table class="border w-full">
+                <tr>
+                    <th class="border">Total Amount</th>
+                    <td class="border text-semibold">600/-</td>
+                </tr>
+                <tr>
+                    <th class="border">Total Discount</th>
+                    <td class="border text-semibold">-100/-</td>
+                </tr>
+                <tr>
+                    <th class="border">Coupon Discount</th>
+                    <td class="border text-semibold">-50/-</td>
+                </tr>
+                <tr>
+                    <th class="border">Tax (18% GST)</th>
+                    <td class="border text-semibold">-150/-</td>
+                </tr>
+                <tr>
+                    <th class="border">Total Payable Amount</th>
+                    <td class="border text-semibold text-3xl font-black text-green-800">1050/-</td>
+                </tr>
+            </table>
+
+            <div class="flex justify-center gap-3 mt-3">
+                <a href="" class="text-white flex w-full bg-orange-600 hover:bg-orange-900 px-3 py-2 rounded text-center">More Shopping</a>
+                <a href="" class="text-white flex w-full bg-teal-600 hover:bg-teal-900 px-3 py-2 rounded text-center">Checkout</a>
+            </div>
+        </div>   
+       </div> 
+    </div>
+
+
+{% endblock content %}
+
+

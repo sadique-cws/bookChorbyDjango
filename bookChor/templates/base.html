@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Chor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <header class="text-gray-600 body-font">
+        <div class="container mx-auto flex justify-between flex-wrap p-5 flex-col md:flex-row items-center">
+          <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-green-500 rounded-full" viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+            </svg>
+            <span class="ml-3 text-xl">BookChor.com</span>
+          </a>
+
+          <form class=" flex-1 flex justify-center">
+            <input type="search" size="70" class="border border-slate-600 px-3 py-2" placeholder="Enter book title, author or ISBN no">
+            <input type="submit" class="bg-teal-600 text-white  px-3 py-2" placeholder="Enter book title, author or ISBN no">
+          </form>
+          <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+            <a class="mr-5 hover:text-gray-900">Home</a>
+            <a class="mr-5 hover:text-gray-900">About</a>
+           
+            {% if user.is_authenticated %}
+              <a class="mr-5 hover:text-gray-900">Logout</a>
+           {% else %}
+              <a class="mr-5 hover:text-gray-900">Register</a>
+              <a class="mr-5 hover:text-gray-900">Login</a>
+           {% endif %}
+            <a href="{% url 'cart'%}" class="mr-5 hover:text-gray-900">Cart</a>
+          </nav>
+          
+        </div>
+      </header>
+
+      {% block content %}{% endblock  %}
+</body>
+</html>
