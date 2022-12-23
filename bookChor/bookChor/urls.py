@@ -11,6 +11,8 @@ urlpatterns = [
     path("<int:b_id>/book/",viewBook,name="view"),
     path("cart/",cart,name="cart"),
     path("add-to-cart/<int:item>",addToCart,name="addToCart"),
+    path("remove-from-cart/<int:item>",removeFromCart,name="removeFromCart"),
+    path("remove-single-item/<int:item>",removeSingleItem,name="removeSingleItem"),
 
 ] 
 

@@ -33,7 +33,7 @@ class OrderItem(models.Model):
     qty = models.IntegerField(default=1)
 
     def __str__(self):
-        return self.user.username
+        return self.item.title
     
 
 ADDRESS_TYPE  = (

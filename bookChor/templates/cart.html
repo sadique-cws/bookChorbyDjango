@@ -8,18 +8,24 @@
         </div>
        <div class="flex">
         <div class="w-8/12 p-5">
-            <div class="flex gap-4">
-                <div class="w-1/6"><img src="https://picsum.photos/50/50" class="w-full" alt=""></div>
+            {% for items in order.items.all %}
+            <div class="flex gap-4 shadow border mb-3">
+                <div class="w-1/6"><img src="{{items.item.cover.url}}" class="w-full" alt=""></div>
                 <div class="w-5/6 flex flex-col gap-2">
-                    <h1 class="text-xl font-sans font-bold uppercase">this is product title</h1>
-                    <h6 class="text-xl font-semibold"><span class="text-green-700">400/-</span> <span class="text-red-700"><del>600/-</del></span></h6>
+                    <h1 class="text-xl font-sans font-bold uppercase">{{items.item.title}}</h1>
+                    <h6 class="text-xl font-semibold"><span class="text-green-700">{{items.item.discount_price}}/-</span> 
+                        <span class="text-red-700"><del>{{items.item.price}}/-</del></span></h6>
                     <div class="flex gap-4  items-center">
-                        <a href="" class="bg-red-500 hover:bg-red-700 text-white px-3 py-2 text-xl">-</a>
-                        <span class="text-2xl font-semibold">0</span>
-                        <a href="" class="bg-green-500 hover:bg-green-700 text-white px-3 py-2 text-xl">+</a>
+                        <a href="{% url 'removeFromCart' items.item.id %}" class="bg-red-500 hover:bg-red-700 text-white px-3 py-2 text-xl">-</a>
+                        <span class="text-2xl font-semibold">{{items.qty}}</span>
+                        <a href="{% url 'addToCart' items.item.id %}" class="bg-green-500 hover:bg-green-700 text-white px-3 py-2 text-xl">+</a>
+                    </div>
+                    <div class="flex">
+                        <a href="{% url 'removeSingleItem' items.item.id %}" class="bg-gray-500 hover:bg-gray-700 text-white px-3 py-2 text-sm mt-5 rounded">Remove</a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>    
         <div class="w-4/12">
             <h1 class="text-3xl font-bold  mb-3">Price Details</h1>
