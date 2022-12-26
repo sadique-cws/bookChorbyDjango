@@ -13,8 +13,9 @@
                 <div class="w-1/6"><img src="{{items.item.cover.url}}" class="w-full" alt=""></div>
                 <div class="w-5/6 flex flex-col gap-2">
                     <h1 class="text-xl font-sans font-bold uppercase">{{items.item.title}}</h1>
-                    <h6 class="text-xl font-semibold"><span class="text-green-700">{{items.item.discount_price}}/-</span> 
-                        <span class="text-red-700"><del>{{items.item.price}}/-</del></span></h6>
+                    <h6 class="text-xl font-semibold"><span class="text-green-700">{{items.getDiscountPrice}}/-</span> 
+                        <span class="text-red-700"><del>{{items.getPrice}}/-</del></span> 
+                        <span class="text-green-600">({{items.getDiscountPercent}}%)</span></h6>
                     <div class="flex gap-4  items-center">
                         <a href="{% url 'removeFromCart' items.item.id %}" class="bg-red-500 hover:bg-red-700 text-white px-3 py-2 text-xl">-</a>
                         <span class="text-2xl font-semibold">{{items.qty}}</span>
@@ -32,23 +33,27 @@
             <table class="border w-full">
                 <tr>
                     <th class="border">Total Amount</th>
-                    <td class="border text-semibold">600/-</td>
+                    <td class="border text-semibold">{{order.getTotalPrice}}/-</td>
                 </tr>
                 <tr>
                     <th class="border">Total Discount</th>
-                    <td class="border text-semibold">-100/-</td>
+                    <td class="border text-semibold">{{order.getTotalDiscountPrice}}/-</td>
                 </tr>
-                <tr>
+               {%if order.coupon %}
+                <tr class="bg-yellow-500">
                     <th class="border">Coupon Discount</th>
-                    <td class="border text-semibold">-50/-</td>
+                    <td class="border text-semibold">-{{order.coupon.amount}}/- (<small>{{order.coupon.code}} Applied</small>)
+                    <a href="{% url 'RemoveCoupon'%}" class="text-white text-sm font-semibold float-right mr-3">Remove</a>
+                    </td>
                 </tr>
+               {%endif %}
                 <tr>
                     <th class="border">Tax (18% GST)</th>
-                    <td class="border text-semibold">-150/-</td>
+                    <td class="border text-semibold">{{order.getTax}}/-</td>
                 </tr>
                 <tr>
                     <th class="border">Total Payable Amount</th>
-                    <td class="border text-semibold text-3xl font-black text-green-800">1050/-</td>
+                    <td class="border text-semibold text-3xl font-black text-green-800">{{order.getPayableAmount}}/-</td>
                 </tr>
             </table>
 
@@ -56,6 +61,16 @@
                 <a href="" class="text-white flex w-full bg-orange-600 hover:bg-orange-900 px-3 py-2 rounded text-center">More Shopping</a>
                 <a href="" class="text-white flex w-full bg-teal-600 hover:bg-teal-900 px-3 py-2 rounded text-center">Checkout</a>
             </div>
+
+            {%if not order.coupon %}
+                <div class="mt-4">
+                    <form class="flex justify-center" method="post" action="{%url 'addCoupon'%}">
+                        {% csrf_token %}
+                        <input type="text" name="code" placeholder="Enter Code" class="flex border px-3 py-2 text-lg border-slate-700">
+                        <input type="submit" value="Apply" class="bg-red-600 flex text-white px-3 py-2">
+                    </form>
+                </div>
+            {% endif %}
         </div>   
        </div> 
     </div>
